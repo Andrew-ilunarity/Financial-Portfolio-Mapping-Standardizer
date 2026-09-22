@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1a73e8;
+      --border-color: #dadce0;
+      --text-color: #202124;
+    }
+    body { font-family: 'Roboto', Arial, sans-serif; padding: 16px; color: var(--text-color); background: #fff; margin: 0; }
+    h3 { font-size: 15px; font-weight: 500; margin-bottom: 15px; color: var(--text-color); }
+    .row { display: flex; align-items: center; margin-bottom: 10px; gap: 8px; }
+    label { flex: 1.5; font-size: 11px; color: #5f6368; font-weight: 500; }
+    
+    .input-wrapper { flex: 1.2; display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 4px; padding: 0 6px; height: 30px; background: #fff; }
+    .input-wrapper:focus-within { border-color: var(--primary-color); border-width: 2px; padding: 0 5px; }
+    input { border: none; outline: none; width: 100%; font-size: 12px; }
+    
+    button { cursor: pointer; border: none; border-radius: 4px; font-weight: 500; font-size: 12px; padding: 6px 10px; transition: background 0.2s; }
+    .pick-btn { background: #e8f0fe; color: var(--primary-color); }
+    .pick-btn:hover { background: #d2e3fc; }
+    
+    .submit-btn { background: var(--primary-color); color: white; width: 100%; margin-top: 20px; padding: 10px; font-size: 13px; }
+    .submit-btn:hover { background: #155dbf; }
+    
+    .hint { font-size: 11px; color: #5f6368; margin-bottom: 15px; line-height: 1.4; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+  </style>
+</head>
+<body>
+
+  <h3>Мапінг колонок портфеля</h3>
+  <div class="hint">
+    Клікніть в таблиці на колонку та натисніть <b>"Взяти"</b>, або введіть номер вручну.
+  </div>
+
+  <div id="fields-container"></div>
+  
+  <button class="submit-btn" onclick="submitMapping()">Сформувати звіт</button>
+
+  <script>
+    const fields = [
+      { id: 'debt', label: 'Борг' }, { id: 'body', label: 'Тіло' },
+      { id: 'percent', label: 'Відсотки' }, { id: 'fine', label: 'Пеня/Штрафи' },
+      { id: 'income', label: 'Дохід' }, { id: 'dpd', label: 'ДПД' },
+      { id: 'region', label: 'Регіон' }, { id: 'dob', label: 'Дата нар.' },
+      { id: 'gender', label: 'Стать' }, { id: 'issued', label: 'Видача' },
+      { id: 'payCount', label: 'К-ть оплат' }, { id: 'paySum', label: 'Сума сплат' },
+      { id: 'lastPay', label: 'Дата ост.сплати' }, { id: 'lastContact', label: 'Контакт' },
+      { id: 'prolong', label: 'Пролонгація' }
+    ];
+
+    window.onload = function() {
+      let container = document.getElementById('fields-container');
+      fields.forEach(f => {
+        let div = document.createElement('div');
+        div.className = 'row';
+        div.innerHTML = `
+          <label>${f.label}</label>
+          <div class="input-wrapper">
+            <input type="number" id="${f.id}" placeholder="№">
+          </div>
+          <button class="pick-btn" onclick="pickCurrentCell('${f.id}')">Взяти</button>
+        `;
+        container.appendChild(div);
+      });
+    };
+//DEV by AID
+    function pickCurrentCell(id) {
+      google.script.run.withSuccessHandler(res => {
+        if (res && res.index) {
+          document.getElementById(id).value = res.index;
+        }
+      }).getActiveColumnIndex();
+    }
+      //Dev by AID
+    function submitMapping() {
+      let mapping = {};
+      fields.forEach(f => mapping[f.id] = document.getElementById(f.id).value);
+      
+      document.body.style.opacity = '0.5';
+      
+      google.script.run
+        .withSuccessHandler(() => {
+          document.body.style.opacity = '1';
+          google.script.host.close();
+        })
+        .processWithMapping(mapping);
+    }
+  </script>
+</body>
+</html>
