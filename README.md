@@ -19,8 +19,8 @@
 
 ## 🌐 Language Switch / Перемикач мови
 
-* [English Version]([src/README.md](https://github.com/Andrew-ilunarity/Financial-Portfolio-Mapping-Standardizer/edit/main/README.md#L27-L75)
-* [Українська версія](https://github.com/Andrew-ilunarity/Financial-Portfolio-Mapping-Standardizer/edit/main/README.md#L77-L104)
+* [English Version]([src/README.md#L27-L75)
+* [Українська версія](src/README.md#L77-L104)
 
 ---
 
