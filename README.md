@@ -19,8 +19,8 @@
 
 ## 🌐 Language Switch / Перемикач мови
 
-* [English Version](https://www.google.com/search?q=%2523-english-version&utm_source=gemini)
-* [Українська версія](https://www.google.com/search?q=%2523-%25D1%2583%25D0%25BA%25D1%2580%25D0%25B0%25D1%2597%25D0%25BD%25D1%2581%25D1%258C%25D0%25BA%25D0%25B0-%25D0%25B2%25D0%25B5%25D1%2580%25D1%2581%25D1%2596%25D1%258F&utm_source=gemini)
+* [English Version]([src/README.md](https://github.com/Andrew-ilunarity/Financial-Portfolio-Mapping-Standardizer/edit/main/README.md#L27-L75)
+* [Українська версія](https://github.com/Andrew-ilunarity/Financial-Portfolio-Mapping-Standardizer/edit/main/README.md#L77-L104)
 
 ---
 
